@@ -37,8 +37,9 @@ The dashboard sheet titles in the right-hand column were read from the published
 
 | Item | Detail |
 |---|---|
-| Source | The same table as [covid-data-exploration-sql](https://github.com/kevinEspinozaTech/covid-data-exploration-sql) (`[Portfolio Project 1]..['covid-data-deaths$']`). **Source pending verification.** The schema matches the Our World in Data COVID-19 dataset, but the exact file was not recorded. |
-| Included in this repo | **No.** |
+| Source | [Our World in Data – COVID-19 dataset](https://github.com/owid/covid-19-data), final version of `owid-covid-data.csv` (last updated 2024-08-19; data up to 2024-08-14). License: CC BY 4.0. It is loaded into the same table as in [covid-data-exploration-sql](https://github.com/kevinEspinozaTech/covid-data-exploration-sql). |
+| How the source was verified | Running these queries on that file gives exactly the figures shown on the published dashboard: 775,935,057 cases, 7,060,988 deaths and a maximum infection rate of 77.72%. |
+| Included in this repo | **No.** Load scripts are provided in [covid-data-exploration-sql/data-prep](https://github.com/kevinEspinozaTech/covid-data-exploration-sql/tree/main/data-prep). |
 
 ### Expected schema
 
@@ -66,15 +67,19 @@ order by TotalDeathCount desc
 
 - **Tableau Public:** [Covid Dashboard P2 – Dashboard 1](https://public.tableau.com/app/profile/kevin.espinoza1014/viz/CovidDashboardP2/Dashboard1)
 - Checked on 2026-10-01 through the Tableau Public profile API. The workbook `CovidDashboardP2` is public, belongs to the profile `kevin.espinoza1014`, and contains the view `Dashboard 1` (plus `Sheet 1`–`Sheet 4`). It was first published in October 2024.
-- The packaged workbook (`.twbx`) can legitimately be downloaded from Tableau Public. It is **not** included in this repository because it embeds data extracts whose source is still pending verification. A local copy is kept outside the repository.
+- The packaged workbook (`.twbx`) can legitimately be downloaded from Tableau Public. It is not stored here because it embeds data extracts; the live dashboard is the reference.
 
-No dashboard screenshot is included. Use the link above to view the live dashboard.
+![COVID-19 Tableau dashboard](images/covid-dashboard.png)
+
+*Static image served by Tableau Public for this view (`Dashboard1.png?:display_static_image=y`), saved on 2026-10-02.* The shaded lines after mid-2024 in *Percent of Population Infected* are **Tableau's built-in forecast** (labelled "Estimate" in the legend), not reported data.
 
 ## Repository structure
 
 ```
 .
 ├── SQLQuery5 TABLEAU.sql   # The four queries used as Tableau data sources
+├── images/
+│   └── covid-dashboard.png # Static image of the published dashboard
 └── README.md
 ```
 
@@ -82,7 +87,15 @@ The second commit in the history removed an earlier block of exploratory queries
 
 ## Results
 
-The repository stores no query output. The aggregated results can be seen in the published Tableau dashboard. **No figures are restated here** to avoid quoting numbers that cannot be checked from this repository.
+Running the four queries on SQL Server 2025 against the OWID file (2026-10-02) completes without errors:
+
+| Query | Result |
+|---|---|
+| 1. Global numbers | 775,935,057 cases · 7,060,988 deaths · **0.91%** death percentage |
+| 2. Total deaths per continent | Europe 2,102,377 · North America 1,671,512 · Asia 1,637,335 · South America 1,357,619 · Africa 259,121 · Oceania 33,024 |
+| 3. Highest infection rate | Cyprus 77.72% (also the top value of the dashboard map legend) |
+
+These match the figures shown on the dashboard.
 
 ## How to run
 
@@ -92,15 +105,14 @@ The repository stores no query output. The aggregated results can be seen in the
 
 ## Limitations
 
-- The list of excluded aggregate locations is tied to the naming used in the version of the dataset that was imported. Other versions may use different names.
+- The list of excluded aggregate locations is tied to the naming used in this final version of the dataset.
 - Query 3 has no `continent is not null` filter, so aggregate rows can appear in the country ranking.
 - The manual SQL → Excel → Tableau step is not automated or versioned.
 
 ## Next steps
 
-- Verify and document the exact dataset version.
 - Replace the Excel hand-off with a reproducible export (for example `bcp` or Python).
-- Add a dashboard screenshot exported from Tableau Public.
+- Fix the axis title typo "Continets" on the dashboard and republish it.
 
 ## Credits
 
