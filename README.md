@@ -37,9 +37,9 @@ The dashboard sheet titles in the right-hand column were read from the published
 
 | Item | Detail |
 |---|---|
-| Source | [Our World in Data – COVID-19 dataset](https://github.com/owid/covid-19-data), final version of `owid-covid-data.csv` (last updated 2024-08-19; data up to 2024-08-14). License: CC BY 4.0. It is loaded into the same table as in [covid-data-exploration-sql](https://github.com/kevinEspinozaTech/covid-data-exploration-sql). |
+| Source | [Our World in Data – COVID-19 dataset](https://github.com/owid/covid-19-data), final version of `owid-covid-data.csv` (last updated 2024-08-19; data up to 2024-08-14). License: CC BY 4.0. It is loaded into the same table as in [covid19-global-exploratory-analysis-sql](https://github.com/kevinEspinozaTech/covid19-global-exploratory-analysis-sql). |
 | How the source was verified | Running these queries on that file gives exactly the figures shown on the published dashboard: 775,935,057 cases, 7,060,988 deaths and a maximum infection rate of 77.72%. |
-| Included in this repo | **No.** Load scripts are provided in [covid-data-exploration-sql/data-prep](https://github.com/kevinEspinozaTech/covid-data-exploration-sql/tree/main/data-prep). |
+| Included in this repo | **No.** Load scripts are provided in [covid19-global-exploratory-analysis-sql/data-prep](https://github.com/kevinEspinozaTech/covid19-global-exploratory-analysis-sql/tree/main/data-prep). |
 
 ### Expected schema
 
@@ -99,7 +99,7 @@ These match the figures shown on the dashboard.
 
 ## How to run
 
-1. Prepare the `covid-data-deaths$` table as described in [covid-data-exploration-sql](https://github.com/kevinEspinozaTech/covid-data-exploration-sql).
+1. Prepare the `covid-data-deaths$` table as described in [covid19-global-exploratory-analysis-sql](https://github.com/kevinEspinozaTech/covid19-global-exploratory-analysis-sql).
 2. Run each numbered query in SSMS and save each result as a separate Excel file.
 3. In Tableau Public, connect to the four files and rebuild the sheets, or open the published dashboard.
 
